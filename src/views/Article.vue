@@ -16,7 +16,7 @@
       close
     </span>
   </button>
-  <article-form></article-form>
+  <article-form v-show="activeEdit" :articleId="this.articleId"></article-form>
 </template>
 
 <script>
