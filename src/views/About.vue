@@ -1,5 +1,6 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <h2>62130500118</h2>
+    <h2>Apisit  kaewnongsaeng</h2>
   </div>
 </template>
