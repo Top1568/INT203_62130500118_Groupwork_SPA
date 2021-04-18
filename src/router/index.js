@@ -5,6 +5,7 @@ import {
 import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import Article from '../views/Article.vue'
+import ArticleForm from '../views/ArticleForm.vue'
 
 const routes = [{
     path: '/',
@@ -23,6 +24,11 @@ const routes = [{
     name: 'Article',
     component: Article,
     props: true
+  },
+  {
+    path: '/articleForm',
+    name: 'ArticleForm',
+    component: ArticleForm
   }
 ]
 

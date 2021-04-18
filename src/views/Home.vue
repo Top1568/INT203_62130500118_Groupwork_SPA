@@ -12,12 +12,18 @@
         </router-link>
       </li>
     </ul>
+    <button>
+      <router-link to="/articleForm">
+        <span class="material-icons">
+          add
+        </span>
+      </router-link>
+    </button>
   </div>
 </template>
 
 <script>
 import BaseTitleBlock from "../components/BaseTitleBlock.vue";
-
 
 export default {
   name: "Home",

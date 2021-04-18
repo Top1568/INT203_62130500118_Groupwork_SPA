@@ -1,12 +1,12 @@
 <template>
   <p>{{ this.article.title }}</p>
   <p>{{ this.article.information }}</p>
-  <button @click="buttonClick" class="btn">
+  <button @click="deleteArticle" class="btn">
     <span class="material-icons">
       delete_forever
     </span>
   </button>
-  <button @click="buttonClick" class="btn">
+  <button @click="editArticle">
     <span class="material-icons">
       edit
     </span>
@@ -16,14 +16,21 @@
       close
     </span>
   </button>
+  <article-form></article-form>
 </template>
 
 <script>
+import ArticleForm from '../views/ArticleForm.vue'
+
 export default {
+  components: {
+    ArticleForm
+  },
   data() {
     return {
       article: Object,
       urlArticle: `http://localhost:3000/Article/${this.articleId}`,
+      activeEdit: false
     };
   },
   props: {
@@ -38,11 +45,18 @@ export default {
         .then((res) => res.json())
         .catch((error) => console.log(error));
     },
-    buttonClick() {
-      this.$router.push("/");
+    editArticle() {
+      this.activeEdit = true
     },
     closeArticle() {
       this.$router.push("/");
+    },
+    async deleteArticle() {
+      fetch(this.urlArticle, { method: "DELETE" })
+        .then(() => {
+          this.$router.push("/");
+        })
+        .catch((error) => console.log(error));
     },
   },
   async created() {
