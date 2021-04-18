@@ -2,8 +2,14 @@
   <div class="home">
     <ul>
       <li v-for="article in articles" :key="article.id">
-        <router-link to="/article"><base-title-block :title="article.title"></base-title-block></router-link> 
-         <router-view />
+        <router-link
+          :to="{
+            name: 'Article',
+            params: { articleId: article.id },
+          }"
+        >
+          <base-title-block :title="article.title"> </base-title-block>
+        </router-link>
       </li>
     </ul>
   </div>
@@ -11,6 +17,7 @@
 
 <script>
 import BaseTitleBlock from "../components/BaseTitleBlock.vue";
+
 
 export default {
   name: "Home",
@@ -20,20 +27,21 @@ export default {
   data() {
     return {
       urlArticle: "http://localhost:3000/Article",
-      articles: []
+      articles: [],
     };
   },
   methods: {
     async getArticles() {
       return fetch(this.urlArticle)
-        .then(res => res.json())
+        .then((res) => res.json())
         .catch((error) => console.log(error));
+    },
+    openArticle(title) {
+      this.$router.push(`/article/${title}`);
     },
   },
   async created() {
     this.articles = await this.getArticles();
   },
 };
-
-
 </script>
