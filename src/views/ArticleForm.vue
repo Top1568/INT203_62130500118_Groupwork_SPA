@@ -1,15 +1,17 @@
 <template>
-  <form @submit.prevent="submitForm">
-    <label>Title </label>
-    <input id="title" type="text" v-model="title" />
+  <div
+    class="w-5/6 mx-auto bg-yellow-50 text-center mt-4 shadow-lg p-6 relative"
+  >
+    <form @submit.prevent="addNewArticle" class="flex flex-col">
+        <input id="title" type="text" v-model="title"  class="text-2xl w-96 mx-auto"/>
+  
 
-    <h2>information</h2>
+      <textarea name="information" v-model="information" class="mt-4 h-screen w-11/12 mx-auto"></textarea>
 
-    <textarea name="information" v-model="information"></textarea>
-    <button @click="addNewArticle">
-      Submit
-    </button>
-  </form>
+   
+      <input type="submit" value="Send Request" class="mx-auto mt-4 w-40 text-lg font-extrabold text-white bg-green-400 rounded-full border-white border-4 px-3 py-2 shadow-lg transform hover:scale-110 motion-reduce:transform-none">
+    </form>
+  </div>
 </template>
 
 <script>
@@ -29,16 +31,16 @@ export default {
   methods: {
     async addNewArticle() {
       if (this.articleId) {
-          fetch(`${this.urlArticles}/${this.articleId}`,{
+        fetch(`${this.urlArticles}/${this.articleId}`, {
           method: "PUT",
           headers: {
             "content-type": "application/json",
           },
           body: JSON.stringify({
             title: this.title,
-            information: this.information
+            information: this.information,
           }),
-        }).catch(error => console.log(error));
+        }).catch((error) => console.log(error));
       } else {
         fetch(this.urlArticles, {
           method: "POST",
@@ -47,7 +49,7 @@ export default {
           },
           body: JSON.stringify({
             title: this.title,
-            information: this.information
+            information: this.information,
           }),
         }).catch((error) => console.log(error));
       }

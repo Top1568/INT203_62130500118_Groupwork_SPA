@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="text-center max-w-lg mx-auto">
     <ul>
       <li v-for="article in articles" :key="article.id">
         <router-link
@@ -12,13 +12,13 @@
         </router-link>
       </li>
     </ul>
-    <button>
-      <router-link to="/articleForm">
-        <span class="material-icons">
+    <router-link to="/articleForm">
+      <button class="bg-green-400 rounded-full border-white border-4 px-3 py-2 shadow-lg transform hover:scale-110 motion-reduce:transform-none">
+        <span class="material-icons text-3xl font-extrabold text-white">
           add
         </span>
-      </router-link>
-    </button>
+      </button>
+    </router-link>
   </div>
 </template>
 
