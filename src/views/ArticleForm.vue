@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="w-5/6 mx-auto bg-yellow-50 text-center mt-4 shadow-lg p-6 relative"
-  >
+  <base-article>
     <form @submit.prevent="addArticle" class="flex flex-col">
       <input
         id="title"
@@ -9,25 +7,20 @@
         v-model="title"
         class="text-2xl w-96 mx-auto"
       />
-
       <textarea
         name="information"
         v-model="information"
         class="mt-4 h-screen w-11/12 mx-auto"
       ></textarea>
-
-      <input
-        type="submit"
-        value="Send Request"
-        class="mx-auto mt-4 w-40 text-lg font-extrabold text-white bg-green-400 rounded-full border-white border-4 px-3 py-2 shadow-lg transform hover:scale-110 motion-reduce:transform-none"
-      />
+      <base-hover-block>
+        <input
+          type="submit"
+          value="Send Request"
+          class="cursor-pointer mx-auto mt-4 w-40 text-lg font-extrabold btnGreen"
+        />
+      </base-hover-block>
     </form>
-      <router-link to="/"><button @click="closeArticle" class="absolute top-2 right-2">
-      <span class="material-icons">
-        close
-      </span>
-    </button></router-link>
-  </div>
+  </base-article>
 </template>
 
 <script>
@@ -52,7 +45,7 @@ export default {
   },
   methods: {
     async addArticle() {
-      if (this.articleTitle) {
+      if (this.articleId) {
         fetch(`${this.urlArticles}/${this.articleId}`, {
           method: "PUT",
           headers: {
@@ -60,7 +53,7 @@ export default {
           },
           body: JSON.stringify({
             title: this.title,
-            information: this.information
+            information: this.information,
           }),
         }).catch((error) => console.log(error));
       } else {
@@ -71,20 +64,18 @@ export default {
           },
           body: JSON.stringify({
             title: this.title,
-            information: this.information
+            information: this.information,
           }),
         }).catch((error) => console.log(error));
       }
-      this.$router.push('/');
+      this.$router.push("/");
     },
   },
   created() {
-    if (this.articleTitle) {
+    if (this.articleId) {
       this.title = this.articleTitle;
       this.information = this.articleInformation;
     }
   },
 };
 </script>
-
-<style></style>

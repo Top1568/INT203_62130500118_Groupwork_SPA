@@ -3,15 +3,15 @@
 @tailwind components;
 
 @tailwind utilities;
-/* 
+
 .title{
-    @apply 
+    @apply text-xl font-semibold text-green-900
 }
 
-.information{
-    @apply
+.btnGreen{
+    @apply bg-green-400 rounded-full border-white text-white border-4 px-3 py-2 shadow-lg
 }
 
-#nav{
-    @apply 
-} */
+.navBar{
+    @apply bg-green-800 w-screen flex items-center justify-between h-16 px-6 text-3xl text-white font-medium
+}

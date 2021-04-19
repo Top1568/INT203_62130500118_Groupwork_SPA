@@ -1,5 +1,5 @@
 <template>
-  <div class="w-5/6 mx-auto bg-yellow-50 text-center mt-4 shadow-lg p-6 relative">
+  <base-article>
     <h1 class="text-2xl">{{ this.article.title }}</h1>
     <div id="information" class="mt-4"></div>
     <div class="absolute bottom-2 right-2 flex space-x-3">
@@ -12,26 +12,23 @@
             articleInformation: this.article.information,
           },
         }"
-      >
-        <button @click="editArticle">
+        ><base-hover-block>
+          <button @click="editArticle">
+            <span class="material-icons">
+              edit
+            </span>
+          </button>
+        </base-hover-block>
+      </router-link>
+      <base-hover-block>
+        <button @click="deleteArticle" class="btn">
           <span class="material-icons">
-            edit
+            delete_forever
           </span>
         </button>
-      </router-link>
-
-      <button @click="deleteArticle" class="btn">
-        <span class="material-icons">
-          delete_forever
-        </span>
-      </button>
+      </base-hover-block>
     </div>
-    <button @click="closeArticle" class="absolute top-2 right-2">
-      <span class="material-icons">
-        close
-      </span>
-    </button>
-  </div>
+  </base-article>
 </template>
 
 <script>
@@ -54,19 +51,15 @@ export default {
         .then((res) => res.json())
         .catch((error) => console.log(error));
     },
-    editArticle() {
-      this.activeEdit = true;
-      this.activeRead = false;
-    },
-    closeArticle() {
-      this.$router.push("/");
-    },
     async deleteArticle() {
-      fetch(this.urlArticle, { method: "DELETE" })
-        .then(() => {
-          this.$router.push("/");
-        })
-        .catch((error) => console.log(error));
+      let confirm = window.confirm("Are you sure?");
+      if (confirm) {
+        fetch(this.urlArticle, { method: "DELETE" })
+          .then(() => {
+            this.$router.push("/");
+          })
+          .catch((error) => console.log(error));
+      }
     },
   },
   async created() {
@@ -79,4 +72,3 @@ export default {
   },
 };
 </script>
-

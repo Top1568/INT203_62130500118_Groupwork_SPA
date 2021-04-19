@@ -1,15 +1,15 @@
 <template>
-  <div class="bg-green-200 m-3 p-3 rounded-3xl shadow-md transform hover:scale-110 motion-reduce:transform-none hover:bg-green-300">
-    <p class="text-xl font-semibold text-green-900">{{ this.title }}</p>
-  </div>
+  <base-hover-block>
+    <div class="bg-green-200 m-3 p-3 rounded-3xl shadow-md hover:bg-green-300">
+      <h1 class="title">{{ this.title }}</h1>
+    </div>
+  </base-hover-block>
 </template>
 
 <script>
 export default {
   props: {
-    title: String
+    title: String,
   },
 };
 </script>
-
-<style></style>
