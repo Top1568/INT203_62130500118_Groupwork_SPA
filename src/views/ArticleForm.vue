@@ -2,15 +2,31 @@
   <div
     class="w-5/6 mx-auto bg-yellow-50 text-center mt-4 shadow-lg p-6 relative"
   >
-    <form @submit.prevent="addNewArticle" class="flex flex-col">
-        <input id="title" type="text" v-model="title"  class="text-2xl w-96 mx-auto"/>
-  
+    <form @submit.prevent="addArticle" class="flex flex-col">
+      <input
+        id="title"
+        type="text"
+        v-model="title"
+        class="text-2xl w-96 mx-auto"
+      />
 
-      <textarea name="information" v-model="information" class="mt-4 h-screen w-11/12 mx-auto"></textarea>
+      <textarea
+        name="information"
+        v-model="information"
+        class="mt-4 h-screen w-11/12 mx-auto"
+      ></textarea>
 
-   
-      <input type="submit" value="Send Request" class="mx-auto mt-4 w-40 text-lg font-extrabold text-white bg-green-400 rounded-full border-white border-4 px-3 py-2 shadow-lg transform hover:scale-110 motion-reduce:transform-none">
+      <input
+        type="submit"
+        value="Send Request"
+        class="mx-auto mt-4 w-40 text-lg font-extrabold text-white bg-green-400 rounded-full border-white border-4 px-3 py-2 shadow-lg transform hover:scale-110 motion-reduce:transform-none"
+      />
     </form>
+      <router-link to="/"><button @click="closeArticle" class="absolute top-2 right-2">
+      <span class="material-icons">
+        close
+      </span>
+    </button></router-link>
   </div>
 </template>
 
@@ -27,10 +43,16 @@ export default {
     articleId: {
       type: Number,
     },
+    articleTitle: {
+      type: String,
+    },
+    articleInformation: {
+      type: String,
+    },
   },
   methods: {
-    async addNewArticle() {
-      if (this.articleId) {
+    async addArticle() {
+      if (this.articleTitle) {
         fetch(`${this.urlArticles}/${this.articleId}`, {
           method: "PUT",
           headers: {
@@ -38,7 +60,7 @@ export default {
           },
           body: JSON.stringify({
             title: this.title,
-            information: this.information,
+            information: this.information
           }),
         }).catch((error) => console.log(error));
       } else {
@@ -49,13 +71,18 @@ export default {
           },
           body: JSON.stringify({
             title: this.title,
-            information: this.information,
+            information: this.information
           }),
         }).catch((error) => console.log(error));
       }
-
-      this.$router.push("/");
+      this.$router.push('/');
     },
+  },
+  created() {
+    if (this.articleTitle) {
+      this.title = this.articleTitle;
+      this.information = this.articleInformation;
+    }
   },
 };
 </script>

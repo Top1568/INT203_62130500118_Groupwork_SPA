@@ -13,7 +13,7 @@
       </li>
     </ul>
     <router-link to="/articleForm">
-      <button class="bg-green-400 rounded-full border-white border-4 px-3 py-2 shadow-lg transform hover:scale-110 motion-reduce:transform-none">
+      <button class="bg-green-400 rounded-full border-white border-4 mt-4 px-3 py-2 shadow-lg transform hover:scale-110 motion-reduce:transform-none">
         <span class="material-icons text-3xl font-extrabold text-white">
           add
         </span>

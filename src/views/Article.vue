@@ -1,17 +1,26 @@
 <template>
-  <div
-    class="w-5/6 mx-auto bg-yellow-50 text-center mt-4 shadow-lg p-6 relative"
-  >
+  <div class="w-5/6 mx-auto bg-yellow-50 text-center mt-4 shadow-lg p-6 relative">
     <h1 class="text-2xl">{{ this.article.title }}</h1>
     <div id="information" class="mt-4"></div>
     <div class="absolute bottom-2 right-2 flex space-x-3">
+      <router-link
+        :to="{
+          name: 'ArticleForm',
+          params: {
+            articleId: this.article.id,
+            articleTitle: this.article.title,
+            articleInformation: this.article.information,
+          },
+        }"
+      >
+        <button @click="editArticle">
+          <span class="material-icons">
+            edit
+          </span>
+        </button>
+      </router-link>
 
-      <button @click="editArticle">
-        <span class="material-icons">
-          edit
-        </span>
-      </button>
-            <button @click="deleteArticle" class="btn">
+      <button @click="deleteArticle" class="btn">
         <span class="material-icons">
           delete_forever
         </span>
@@ -22,26 +31,15 @@
         close
       </span>
     </button>
-    <article-form
-      v-show="activeEdit"
-      :articleId="this.articleId"
-    ></article-form>
   </div>
 </template>
 
 <script>
-import ArticleForm from "../views/ArticleForm.vue";
-
 export default {
-  components: {
-    ArticleForm,
-  },
   data() {
     return {
       article: Object,
       urlArticle: `http://localhost:3000/Article/${this.articleId}`,
-      activeEdit: false,
-      contentHTML: "",
     };
   },
   props: {
@@ -58,6 +56,7 @@ export default {
     },
     editArticle() {
       this.activeEdit = true;
+      this.activeRead = false;
     },
     closeArticle() {
       this.$router.push("/");
@@ -81,4 +80,3 @@ export default {
 };
 </script>
 
-<style></style>

@@ -28,7 +28,8 @@ const routes = [{
   {
     path: '/articleForm',
     name: 'ArticleForm',
-    component: ArticleForm
+    component: ArticleForm,
+    props: true
   }
 ]
 
